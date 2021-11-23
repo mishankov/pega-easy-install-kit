@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  database:
+    build: ./database
+    image: pega-easy-install-database
+    container_name: pega-database
+    environment: 
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose: 
+      - 5432
+    ports: 
+      - "5432:5432"
+
+  application:
+    build: ./application
+    image: pega-easy-install-application
+    container_name: pega-application
+    environment: 
+      - JDBC_URL=jdbc:postgresql://database:5432/postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_PORT=5432
+    ports: 
+      - "8080:8080"
+      - "8000:8000"
+    depends_on:
+      - database
