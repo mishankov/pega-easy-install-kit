@@ -43,7 +43,6 @@ docker-compose up -d database
 --adminPassword install \
 --rulesSchema rules \
 --dataSchema data 
-
 ```
 
 6. Wait until installation finishes. You will see something like this
