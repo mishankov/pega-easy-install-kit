@@ -22,7 +22,7 @@ docker-compose up -d database
 
 ```shell
 ./install.sh \
---driverJAR ../../libs/postgresql-42.2.14.jar \
+--driverJAR /path/to/pega-easy-install-kit/libs/postgresql-42.2.14.jar \
 --driverClass org.postgresql.Driver \
 --dbType postgres \
 --dbURL jdbc:postgresql://localhost:5432/postgres \
@@ -33,6 +33,7 @@ docker-compose up -d database
 --dataSchema data 
 
 ```
+Change `/path/to` part in `--driverJAR` option to actual absolute path of `pega-easy-install-kit` folder
 
 5. Wait until installation finishes. You will see something like this
 
