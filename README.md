@@ -3,10 +3,10 @@
 > **DISCLAIMER:** this installation method is not suitable for production. But you can refer to it while building your environment
 
 ## Prerequisites
-- Docker
-- Docker Compose
-- JDK + properly set `JAVA_HOME` environment variable
-- Unpacked Pega Platform distribution
+- Docker - https://docs.docker.com/engine/install/
+- Docker Compose - https://docs.docker.com/compose/install/
+- JDK + properly set `JAVA_HOME` environment variable - https://itsfoss.com/set-java-home-ubuntu/
+- Pega Platform distribution - https://community.pega.com/digital-delivery
 
 ## Installation
 
