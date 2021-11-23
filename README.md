@@ -33,7 +33,7 @@ docker-compose up -d database
 --dataSchema data 
 
 ```
-Change `/path/to` part in `--driverJAR` option to actual absolute path of `pega-easy-install-kit` folder
+Change `/path/to` part in `--driverJAR` option to the actual absolute path of `pega-easy-install-kit` folder (`~` is supported)
 
 5. Wait until installation finishes. You will see something like this
 
