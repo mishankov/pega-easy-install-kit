@@ -7,7 +7,6 @@ Scripts and files one needs to quickly install Pega Platform for testing purpose
 _Tested on:_ 
 
 ![Pega 8.5.1](https://img.shields.io/badge/pega-8.5.1-blue)
-![Pega 8.5.1](https://img.shields.io/badge/pega-8.5.1-blue)
 
 ## Prerequisites
 - Docker - https://docs.docker.com/engine/install/
@@ -20,6 +19,11 @@ _Tested on:_
 1. Clone or download this repository
 2. Unpack Pega Platform distribution to `distr/` folder inside this repo
 3. Copy `prweb.war` from `distr/archives` to `application/`
+
+```shell
+cp distr/archives/prweb.war application/
+```
+
 4. From the root directory of this repo run 
 
 ```shell
