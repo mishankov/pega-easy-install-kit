@@ -6,7 +6,7 @@ export INITIAL_WD=${PWD}
 echo Clone prweb.war
 cp distr/archives/prweb.war application/
 
-echo Inittialize database
+echo Initialize database
 docker-compose up -d database
 
 echo Run install script

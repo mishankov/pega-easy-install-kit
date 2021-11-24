@@ -6,7 +6,7 @@ Scripts and files one needs to quickly install Pega Platform for testing purpose
 
 _Tested on:_ 
 
-![Pega 8.5.1](https://img.shields.io/badge/pega-8.5.1-blue)
+![Pega](https://img.shields.io/badge/pega-8.5.1%20|%208.6.1-433254)
 
 ## Prerequisites
 - Docker - https://docs.docker.com/engine/install/
