@@ -1,4 +1,4 @@
-FROM busybox AS builder
+FROM busybox:1.35 AS builder
 
 COPY prweb.war /
 RUN mkdir prweb
