@@ -6,12 +6,12 @@ Scripts and files one needs to quickly install Pega Platform for testing purpose
 
 _Tested on:_ 
 
-![Pega](https://img.shields.io/badge/pega-8.5.1%20|%208.6.1-433254)
+![Pega](https://img.shields.io/badge/pega-8.5.1%20|%208.6.1%20|%208.6.2-433254)
 
 ## Prerequisites
+
 - Docker - https://docs.docker.com/engine/install/
 - Docker Compose - https://docs.docker.com/compose/install/
-- JDK + properly set `JAVA_HOME` environment variable - https://itsfoss.com/set-java-home-ubuntu/
 - Pega Platform distribution - https://community.pega.com/digital-delivery
 
 ## Installation
@@ -30,19 +30,10 @@ cp distr/archives/prweb.war application/
 docker-compose up -d database
 ```
 
-5. Go to `distr/scripts` and run command below. Change `/path/to` part in `--driverJAR` option to the actual absolute path of `pega-easy-install-kit` folder (`~` is supported)
+5. Run installer script
 
 ```shell
-./install.sh \
---driverJAR /path/to/pega-easy-install-kit/application/postgresql-42.2.14.jar \
---driverClass org.postgresql.Driver \
---dbType postgres \
---dbURL jdbc:postgresql://localhost:5432/postgres \
---dbUser postgres \
---dbPassword postgres \
---adminPassword install \
---rulesSchema rules \
---dataSchema data 
+docker-compose up installer
 ```
 
 6. Wait until installation finishes. You will see something like this
@@ -56,7 +47,7 @@ Total time: 69 minutes 42 seconds
 
 ```shell
 docker-compose stop
-docker-compose up -d
+docker-compose up -d database application
 ```
 
 8. After some time go to http://localhost:8080/prweb, login with credentials administrator@pega.com / install and enjoy! 

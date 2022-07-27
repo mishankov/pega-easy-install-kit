@@ -1,10 +1,27 @@
 version: "3.8"
 
 services:
+  installer:
+    image: openjdk:11-slim-buster
+    container_name: pega-installer
+    command: ["./install-pega.sh"]
+    volumes:
+      - ./distr:/distr
+      - ./application/postgresql-42.2.14.jar:/postgresql-42.2.14.jar
+      - ./installer/install-pega.sh:/install-pega.sh
+    depends_on:
+      database:
+        condition: service_healthy
+
   database:
     build: ./database
     image: pega-easy-install-database
     container_name: pega-database
+    healthcheck:
+      test: /usr/bin/pg_isready
+      interval: 5s
+      timeout: 10s
+      retries: 120
     environment: 
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -27,4 +44,5 @@ services:
       - "8080:8080"
       - "8000:8000"
     depends_on:
-      - database
+      database:
+        condition: service_healthy
