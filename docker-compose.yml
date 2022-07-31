@@ -40,9 +40,24 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
       - DB_PORT=5432
+      - JAVA_OPTS=-Dpega.logdir=/usr/local/tomcat/logs/pega_logs
     ports: 
       - "8080:8080"
       - "8000:8000"
+    volumes:
+      - application-logs:/usr/local/tomcat/logs/pega_logs:rw
     depends_on:
       database:
         condition: service_healthy
+  
+  web-tail:
+    image: ghcr.io/mishankov/web-tail:main
+    container_name: pega-logs
+    ports: 
+      - "4444:4444"
+    volumes:
+      - ./web-tail/web-tail.config.json:/usr/src/app/dist/web-tail.config.json
+      - application-logs:/usr/src/app/pega_logs
+
+volumes:
+  application-logs:

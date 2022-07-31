@@ -11,6 +11,6 @@ docker-compose up installer
 
 echo Start containers
 docker-compose stop
-docker-compose up -d database application
+docker-compose up -d database application web-tail
 
 echo FINALE
