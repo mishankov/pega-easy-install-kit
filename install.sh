@@ -4,7 +4,7 @@ echo Clone prweb.war
 cp distr/archives/prweb.war application/
 
 echo Initialize database
-docker-compose up -d database
+docker-compose up -d database web-tail
 
 echo Run install script
 docker-compose up installer

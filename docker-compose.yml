@@ -18,7 +18,7 @@ services:
     image: pega-easy-install-database
     container_name: pega-database
     healthcheck:
-      test: /usr/bin/pg_isready
+      test: ["CMD-SHELL", "/usr/bin/pg_isready -U postgres -d postgres"]
       interval: 5s
       timeout: 10s
       retries: 120
@@ -30,6 +30,8 @@ services:
       - 5432
     ports: 
       - "5432:5432"
+    volumes:
+      - database-logs:/logs:rw
 
   application:
     build: ./application
@@ -58,6 +60,8 @@ services:
     volumes:
       - ./web-tail/web-tail.config.json:/usr/src/app/dist/web-tail.config.json
       - application-logs:/usr/src/app/pega_logs
+      - database-logs:/usr/src/app/database_logs
 
 volumes:
   application-logs:
+  database-logs:
