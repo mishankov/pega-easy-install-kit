@@ -10,9 +10,7 @@ docker exec pega-logs node config-generator.js
 echo Run install script
 docker-compose up installer
 
-echo Start containers
+echo Stop everything
 docker-compose stop
-docker-compose up -d database application web-tail
-docker exec pega-logs node config-generator.js
 
 echo FINALE
