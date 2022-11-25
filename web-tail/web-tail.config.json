@@ -1,0 +1,14 @@
+{
+    "sources": [
+        {
+            "name": "PegaRULES",
+            "type": "local:file",
+            "path": "/usr/src/app/pega_logs/PegaRULES.log"
+        }, 
+        {
+            "name": "PegaRULES-ALERT",
+            "type": "local:file",
+            "path": "/usr/src/app/pega_logs/PegaRULES-ALERT.log"
+        }
+    ]
+}

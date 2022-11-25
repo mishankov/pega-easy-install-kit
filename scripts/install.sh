@@ -9,8 +9,7 @@ docker-compose up -d database
 echo Run install script
 docker-compose up installer
 
-echo Start containers
+echo Stop everything
 docker-compose stop
-docker-compose up -d database application
 
 echo FINALE

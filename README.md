@@ -47,7 +47,10 @@ Total time: 69 minutes 42 seconds
 
 ```shell
 docker-compose stop
-docker-compose up -d database application
+docker-compose up -d database application web-tail
+docker exec pega-logs node config-generator.js
 ```
 
 8. After some time go to http://localhost:8080/prweb, login with credentials administrator@pega.com / install and enjoy! 
+
+Pega logs are available at http://localhost:4444/ powered by [web-tail](https://github.com/mishankov/web-tail)

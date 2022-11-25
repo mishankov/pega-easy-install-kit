@@ -5,7 +5,7 @@ RUN mkdir prweb
 RUN unzip -q -o prweb.war -d /prweb
 
 
-FROM pegasystems/pega-ready:2.1.0
+FROM pegasystems/pega-ready:3.1.292
 
 ENV JDBC_CLASS=org.postgresql.Driver
 
@@ -19,3 +19,4 @@ COPY --chown=pegauser:root --from=builder /prweb ${CATALINA_HOME}/webapps/prweb
 RUN chmod -R g+rw ${CATALINA_HOME}/webapps/prweb
 RUN chmod g+rw ${CATALINA_HOME}/webapps/prweb/WEB-INF/classes/prconfig.xml
 RUN chmod g+rw ${CATALINA_HOME}/webapps/prweb/WEB-INF/classes/prlog4j2.xml
+RUN mkdir ${CATALINA_HOME}/logs/pega_logs && chmod g+rw ${CATALINA_HOME}/logs/pega_logs

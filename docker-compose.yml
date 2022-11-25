@@ -18,7 +18,7 @@ services:
     image: pega-easy-install-database
     container_name: pega-database
     healthcheck:
-      test: /usr/bin/pg_isready
+      test: ["CMD-SHELL", "/usr/bin/pg_isready -U postgres -d postgres"]
       interval: 5s
       timeout: 10s
       retries: 120
@@ -30,6 +30,8 @@ services:
       - 5432
     ports: 
       - "5432:5432"
+    volumes:
+      - database-logs:/logs:rw
 
   application:
     build: ./application
@@ -40,9 +42,27 @@ services:
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
       - DB_PORT=5432
+      - JAVA_OPTS=-Dpega.logdir=/usr/local/tomcat/logs/pega_logs
     ports: 
       - "8080:8080"
       - "8000:8000"
+    volumes:
+      - application-logs:/usr/local/tomcat/logs/pega_logs:rw
     depends_on:
       database:
         condition: service_healthy
+  
+  web-tail:
+    build: ./web-tail
+    image: pega-easy-install-logs
+    container_name: pega-logs
+    restart: unless-stopped
+    ports: 
+      - "4444:4444"
+    volumes:
+      - application-logs:/usr/src/app/pega_logs
+      - database-logs:/usr/src/app/database_logs
+
+volumes:
+  application-logs:
+  database-logs:
