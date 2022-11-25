@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const logFolders = [
     '/pega_logs',
-    '/database_logs',
+    // '/database_logs',
 ]
 
 const config = {
@@ -25,5 +25,8 @@ logFolders.forEach(logFolder => {
     }
     
 });
+
+console.log("Web-tail config: ")
+console.log(JSON.stringify(config, null, 2))
 
 fs.writeFileSync('/usr/src/app/dist/web-tail.config.json', JSON.stringify(config, null, 2));

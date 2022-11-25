@@ -9,12 +9,6 @@
             "name": "PegaRULES-ALERT",
             "type": "local:file",
             "path": "/usr/src/app/pega_logs/PegaRULES-ALERT.log"
-        },
-        {
-            "name": "Database",
-            "type": "local:file",
-            "path": "/usr/src/app/database_logs/postgresql.log"
         }
-        
     ]
 }
