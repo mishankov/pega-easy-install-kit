@@ -27,7 +27,7 @@ cp distr/archives/prweb.war application/
 4. From the root directory of this repo run 
 
 ```shell
-docker-compose up -d database web-tail
+docker-compose up -d database
 ```
 
 5. Run installer script
@@ -48,6 +48,7 @@ Total time: 69 minutes 42 seconds
 ```shell
 docker-compose stop
 docker-compose up -d database application web-tail
+docker exec pega-logs node config-generator.js
 ```
 
 8. After some time go to http://localhost:8080/prweb, login with credentials administrator@pega.com / install and enjoy! 
