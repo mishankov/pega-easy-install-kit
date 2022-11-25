@@ -13,7 +13,7 @@ const config = {
 logFolders.forEach(logFolder => {
     const fullPath = basePath + logFolder;
     try {
-        fs.readdirSync(fullPath).forEach(file => {
+        fs.readdirSync(fullPath).filter(file => file.endsWith('.log')).forEach(file => {
             config.sources.push({
                 "name": file,
                 "type": "local:file",
