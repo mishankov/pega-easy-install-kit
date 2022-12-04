@@ -37,6 +37,7 @@ services:
     build: ./application
     image: pega-easy-install-application
     container_name: pega-application
+    restart: unless-stopped
     environment: 
       - JDBC_URL=jdbc:postgresql://database:5432/postgres
       - DB_USERNAME=postgres
