@@ -44,6 +44,7 @@ services:
       - DB_PASSWORD=postgres
       - DB_PORT=5432
       - JAVA_OPTS=-Dpega.logdir=/usr/local/tomcat/logs/pega_logs
+      - NODE_TYPE=WebUser,BackgroundProcessing,Search,Stream
     ports: 
       - "8080:8080"
       - "8000:8000"
