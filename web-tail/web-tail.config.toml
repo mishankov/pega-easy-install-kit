@@ -1,0 +1,9 @@
+[[sources]]
+name = "PegaRULES"
+type = "local:file"
+path = "/usr/src/app/pega_logs/PegaRULES.log"
+
+[[sources]]
+name = "PegaRULES-ALERT"
+type = "local:file"
+path = "/usr/src/app/pega_logs/PegaRULES-ALERT.log"

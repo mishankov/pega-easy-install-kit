@@ -6,9 +6,7 @@ const logFolders = [
   // '/database_logs',
 ];
 
-const config = {
-  sources: [],
-};
+var config = "";
 
 logFolders.forEach((logFolder) => {
   const fullPath = basePath + logFolder;
@@ -16,11 +14,7 @@ logFolders.forEach((logFolder) => {
     fs.readdirSync(fullPath)
       .filter((file) => file.endsWith(".log"))
       .forEach((file) => {
-        config.sources.push({
-          name: file,
-          type: "local:file",
-          path: fullPath + "/" + file,
-        });
+        config = config + `[[sources]]\nname = \"${file}\"\ntype = \"local:file\"\npath = \"${fullPath + "/" + file}\"\n\n`;
       });
   } catch (error) {
     console.log(`Error reading ${fullPath}: ${error.toString()}`);
@@ -28,9 +22,6 @@ logFolders.forEach((logFolder) => {
 });
 
 console.log("Web-tail config: ");
-console.log(JSON.stringify(config, null, 2));
+console.log(config);
 
-fs.writeFileSync(
-  "/usr/src/app/dist/web-tail.config.json",
-  JSON.stringify(config, null, 2)
-);
+fs.writeFileSync("/usr/src/app/dist/web-tail.config.toml", config);
