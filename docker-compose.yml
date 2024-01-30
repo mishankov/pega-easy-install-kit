@@ -17,6 +17,7 @@ services:
     build: ./database
     image: pega-easy-install-database
     container_name: pega-database
+    restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "/usr/bin/pg_isready -U postgres -d postgres"]
       interval: 5s
