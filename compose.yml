@@ -1,6 +1,6 @@
 services:
   installer:
-    image: openjdk:11-slim-buster
+    image: eclipse-temurin:11.0.31_11-jdk-jammy
     container_name: pega-installer
     command: ["./install-pega.sh"]
     volumes:
