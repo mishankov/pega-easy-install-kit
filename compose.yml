@@ -69,6 +69,12 @@ services:
     image: pega-easy-install-application
     container_name: pega-application
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent --max-time 10 http://localhost:8080/prweb/ >/dev/null"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 90s
     environment:
       - JDBC_URL=jdbc:postgresql://database:5432/postgres
       - DB_USERNAME=postgres

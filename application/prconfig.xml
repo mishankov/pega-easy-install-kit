@@ -5,11 +5,19 @@
         value="merged" />
 
     <env
+        name="database/databases/PegaRULES/dataSource"
+        value="java:comp/env/jdbc/PegaRULES" />
+
+    <env
+        name="database/databases/PegaDATA/dataSource"
+        value="java:comp/env/jdbc/PegaRULES" />
+
+    <env
         name="services/stream/provider"
         value="ExternalKafka" />
 
     <env
-        name="services/stream/provider/url"
+        name="services/stream/broker/url"
         value="kafka:9092" />
 
     <env
