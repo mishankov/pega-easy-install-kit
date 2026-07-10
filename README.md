@@ -50,7 +50,6 @@ Total time: 69 minutes 42 seconds
 ```shell
 docker-compose stop
 docker-compose up -d database application web-tail kafka-ui
-docker exec pega-logs node config-generator.js
 ```
 
 Docker Compose starts Kafka automatically because the application service depends on a healthy Kafka broker. Pega and Kafbat UI connect from the Compose network at `kafka:9092`; the broker is not exposed directly to the host.
