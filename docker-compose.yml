@@ -39,22 +39,8 @@ services:
     container_name: pega-kafka
     hostname: kafka
     restart: unless-stopped
-    ports:
-      - "29092:29092"
-    environment:
-      KAFKA_NODE_ID: "1"
-      KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
-      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:29092
-      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
-      # Kafka's internal topics must also fit on the single broker.
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
     volumes:
+      - ./kafka/server.properties:/mnt/shared/config/server.properties:ro
       - kafka-data:/var/lib/kafka/data
     healthcheck:
       test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]

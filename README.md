@@ -53,7 +53,7 @@ docker-compose up -d database application web-tail kafka-ui
 docker exec pega-logs node config-generator.js
 ```
 
-Docker Compose starts Kafka automatically because the application service depends on a healthy Kafka broker. Pega connects from the Compose network at `kafka:9092`. Kafka clients running on the host can connect at `localhost:29092`.
+Docker Compose starts Kafka automatically because the application service depends on a healthy Kafka broker. Pega and Kafbat UI connect from the Compose network at `kafka:9092`; the broker is not exposed directly to the host.
 
 8. After some time go to http://localhost:8080/prweb, login with credentials administrator@pega.com / install and enjoy! 
 
