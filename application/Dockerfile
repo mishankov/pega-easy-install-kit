@@ -15,6 +15,7 @@ COPY --chown=pegauser:root tomcat-users.xml ${CATALINA_HOME}/conf
 
 # Copy prweb to tomcat webapps directory
 COPY --chown=pegauser:root --from=builder /prweb ${CATALINA_HOME}/webapps/prweb
+COPY --chown=pegauser:root prconfig.xml ${CATALINA_HOME}/webapps/prweb/WEB-INF/classes/prconfig.xml
 
 RUN chmod -R g+rw ${CATALINA_HOME}/webapps/prweb
 RUN chmod g+rw ${CATALINA_HOME}/webapps/prweb/WEB-INF/classes/prconfig.xml

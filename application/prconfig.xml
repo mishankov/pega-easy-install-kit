@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pegarules>
+    <env
+        name="initialization/settingsource"
+        value="merged" />
+
+    <env
+        name="services/stream/provider"
+        value="ExternalKafka" />
+
+    <env
+        name="services/stream/provider/url"
+        value="kafka:9092" />
+
+    <env
+        name="services/stream/external/replication/factor"
+        value="1" />
+</pegarules>

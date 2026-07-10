@@ -34,6 +34,40 @@ services:
     volumes:
       - database-logs:/logs:rw
 
+  kafka:
+    image: apache/kafka:4.0.2
+    container_name: pega-kafka
+    hostname: kafka
+    restart: unless-stopped
+    ports:
+      - "29092:29092"
+    environment:
+      # Single-node KRaft cluster for local development only.
+      KAFKA_NODE_ID: "1"
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_LISTENERS: INTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093,EXTERNAL://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:9092,EXTERNAL://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_DEFAULT_REPLICATION_FACTOR: "1"
+      KAFKA_MIN_INSYNC_REPLICAS: "1"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_NUM_PARTITIONS: "1"
+      CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+
   application:
     build: ./application
     image: pega-easy-install-application
@@ -45,7 +79,7 @@ services:
       - DB_PASSWORD=postgres
       - DB_PORT=5432
       - JAVA_OPTS=-Dpega.logdir=/usr/local/tomcat/logs/pega_logs
-      - NODE_TYPE=WebUser,BackgroundProcessing,Search,Stream
+      - NODE_TYPE=WebUser,BackgroundProcessing,Search
     ports: 
       - "8080:8080"
       - "8000:8000"
@@ -53,6 +87,8 @@ services:
       - application-logs:/usr/local/tomcat/logs/pega_logs:rw
     depends_on:
       database:
+        condition: service_healthy
+      kafka:
         condition: service_healthy
   
   web-tail:
@@ -69,3 +105,4 @@ services:
 volumes:
   application-logs:
   database-logs:
+  kafka-data:
