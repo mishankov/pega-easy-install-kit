@@ -2,12 +2,12 @@ echo Clone prweb.war
 xcopy distr\archives\prweb.war application
 
 echo Initialize database
-docker-compose up -d database
+compose up -d database
 
 echo Run install script
-docker-compose up installer
+compose up installer
 
 echo Stop everything
-docker-compose stop
+compose stop
 
 echo FINALE

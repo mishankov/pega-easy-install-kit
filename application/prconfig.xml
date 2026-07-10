@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pegarules>
+    <env
+        name="initialization/settingsource"
+        value="merged" />
+
+    <env
+        name="database/databases/PegaRULES/dataSource"
+        value="java:comp/env/jdbc/PegaRULES" />
+
+    <env
+        name="database/databases/PegaDATA/dataSource"
+        value="java:comp/env/jdbc/PegaRULES" />
+
+    <env
+        name="services/stream/provider"
+        value="ExternalKafka" />
+
+    <env
+        name="services/stream/broker/url"
+        value="kafka:9092" />
+
+    <env
+        name="services/stream/external/replication/factor"
+        value="1" />
+</pegarules>
