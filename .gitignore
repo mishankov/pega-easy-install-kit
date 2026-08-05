@@ -1,2 +1,4 @@
 distr/
 application/prweb.war
+*.zip
+.DS_Store

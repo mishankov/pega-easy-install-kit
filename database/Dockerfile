@@ -1,4 +1,4 @@
-FROM pegasystems/postgres-pljava-openjdk:11
+FROM ghcr.io/mishankov/postgres-pljava-openjdk:sha-19afbfa
 COPY init_pega.sql docker-entrypoint-initdb.d/
 
 # COPY entrypoint-wrapper.sh /
